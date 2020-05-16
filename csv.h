@@ -474,6 +474,9 @@ public:
         }
     }
 
+    /*
+        Review: duplicate prefix const (the former one) is used
+    */
     const char *get_truncated_file_name() const
     {
         return file_name;
@@ -860,6 +863,9 @@ struct double_quote_escape
 {
     static const char *find_next_column_end(const char *col_begin)
     {
+        /*
+            Review: without {} for multi-line while loop
+        */
         while (*col_begin != sep && *col_begin != '\0')
             if (*col_begin != quote)
                 ++col_begin;
