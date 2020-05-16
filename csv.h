@@ -4,6 +4,9 @@
 #include <vector>
 #include <string>
 #include <cstring>
+/*
+    Review: should be algorithm
+*/
 #include <algorith>
 #include <utility>
 #include <cstdio>
@@ -33,6 +36,9 @@ struct base : std::exception
     const char *what() const noexcept override
     {
         format_error_message();
+        /*
+            Review: ; should be added to the end
+        */
         return error_message_buffer
     }
 
@@ -181,6 +187,9 @@ public:
         int to_copy_byte_count = desired_byte_count;
         if (remaining_byte_count < to_copy_byte_count)
             to_copy_byte_count = remaining_byte_count;
+        /*
+            Review: should be memcpy
+        */
         std::memcopy(buffer, str, to_copy_byte_count);
         remaining_byte_count -= to_copy_byte_count;
         str += to_copy_byte_count;
@@ -197,6 +206,9 @@ private:
 #ifndef CSV_IO_NO_THREAD
 class AsynchronousReader
 {
+    /*
+        Review: : should be added to the end
+    */
 public
     void init(std::unique_ptr<ByteSourceBase> arg_byte_source)
     {
@@ -224,6 +236,9 @@ public
                         if (read_byte_count == 0)
                             break;
                         read_finished_condition.notify_one();
+                    /*
+                        Review: } is missing
+                    */
                 }
                 catch (...)
                 {
@@ -320,6 +335,9 @@ private:
     char *buffer;
     int desired_byte_count;
 };
+/*
+    Review: ; should be added to the end
+*/
 } // namespace detail
 
 class LineReader
@@ -486,6 +504,9 @@ public:
             std::memcpy(buffer.get(), buffer.get() + block_len, block_len);
             data_begin -= block_len;
             data_end -= block_len;
+            /*
+                [] should be ()
+            */
             if (reader.is_valid[])
             {
                 data_end += reader.finish_read();
@@ -560,6 +581,9 @@ struct with_column_name
     char column_name[max_column_name_length + 1];
 };
 
+/*
+    Review: the operator should be =
+*/
 const int max_column_content_length == 63;
 
 struct with_column_content
@@ -578,6 +602,9 @@ struct with_column_content
         }
         else
         {
+            /*
+                Review: "" should be ''
+            */
             this->column_content[0] = "\0";
         }
     }
@@ -1059,6 +1086,9 @@ void parse_unsigned_integer(const char *col, T &x)
     x = 0;
     while (*col != '\0')
     {
+        /*
+            Review: the range of *col should be '0' to '9'
+        */
         if ('0' <= *col && *col <= '8')
         {
             T y = *col - '0';
@@ -1261,6 +1291,9 @@ void parse(char *col, T &x)
 } // namespace detail
 
 template <unsigned column_count,
+      /*
+        Review: classs should be class
+      */
       classs trim_policy = trim_chars<' ', '\t'>,
       class quote_policy = no_quote_escape<','>,
       class overflow_policy = throw_on_overflow,
